@@ -18,6 +18,7 @@ parser.add_argument(
     '-pre', help="time before event,seconds", type=int, default=60)
 parser.add_argument(
     '-post', help="time after event, seconds", type=int, default=200)
+parser.add_argument('-col', help="Column number in log file",type=int,default=5)
 
 args = parser.parse_args()
 
@@ -26,7 +27,7 @@ s = args.hour + ":" + args.minute + ":" + args.second + \
 unixTime = time.mktime(datetime.datetime.strptime(
     s, "%H:%M:%S-%d/%m/%Y").timetuple())
 
-print "unixTime = ", unixTime
+#print "unixTime = ", unixTime
 
 fr = unixTime - args.pre
 to = unixTime + args.post
@@ -71,9 +72,15 @@ def makeGnup(fil,lower,upper):
 set xdata time\n\
 set timefmt \"%y.%m.%d-%H.%M.%S\"\n\
 set xrange[\"" + unixToCreaTime(fr)+ "\":\"" + unixToCreaTime(to) + "\"]\n\
-plot '"+fil+"' u 1:5"
+plot '"+fil+"' u 1:"+ str(args.col)
     return gnup
 
 
-print "YARGS! ", args
-print makeGnup(pickFile(unixTime),fr,to)
+def dumpToFile(nam,content):
+    ofle = open(nam,'w')
+    for line in content:
+        ofle.write(line)
+    ofle.close()
+
+dumpToFile("iplot.plt", makeGnup(pickFile(unixTime),fr,to))
+#print "YARGS! ", args
