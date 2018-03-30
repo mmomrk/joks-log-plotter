@@ -20,6 +20,7 @@ parser.add_argument(
     '-post', help="time after event, seconds", type=int, default=200)
 parser.add_argument(
     '-col', help="Column numbers in log file", type=int, default=[5], nargs="+")
+parser.add_argument('-lc', help='List columns in file', action='store_true')
 
 args = parser.parse_args()
 
@@ -68,8 +69,6 @@ def pickFile(requiredTime):
             continue
         retName = filNam
         break
-    if retName == '':
-        print "Corresponding file not found. Sad"
     return retName
 
 
@@ -97,7 +96,7 @@ def makeGnup(fil, lower, upper):
 set terminal pngcairo size 1024,768\n\
 set output \"plot.png\"\n\
 set multiplot\n\
-set lmargin screen " + str(.03 * ncols) + "\n\
+set lmargin screen " + str(0.01 + .03 * ncols) + "\n\
 set xdata time\n\
 set timefmt \"%y.%m.%d-%H.%M.%S\"\n\
 set xrange[\"" + unixToCreaTime(fr) + "\":\"" + unixToCreaTime(to) + "\"]\n"
@@ -106,7 +105,8 @@ set xrange[\"" + unixToCreaTime(fr) + "\":\"" + unixToCreaTime(to) + "\"]\n"
         gnup += "set ytics offset " + str(-3 * i) + ",0 \
 textcolor rgb \"" + paint + "\" \n\
 set key height " + str(i * 2 + 1) + "\n\
-plot '" + fil + "' u 1:" + str(col) + " w l title '" + str(col) + "' linecolor rgb \"" + paint + "\" \n"
+plot '" + fil + "' u 1:" + str(col) + " w l title '" + str(col) + "' linecolor rgb \"" + paint + "\" \n\
+unset border\n"
         i += 1
     return gnup
 
@@ -117,6 +117,25 @@ def dumpToFile(nam, content):
         ofle.write(line)
     ofle.close()
 
+def showHeader(fnam):
+    fle = open(fnam,'r')
+    header = fle.readline()
+    splitHead = header.split()
+    for num,colName in zip(range(len(splitHead)),splitHead):
+	print num,'\t',colName
 
-dumpToFile("iplot.plt", makeGnup(pickFile(unixTime), fr, to))
+filNam = pickFile(unixTime)
+if filNam == '':
+    print "Corresponding enclosing file not found. Sad"
+    sys.exit(1)
+else:
+    print "Data found in file: ", filNam
+
+
+if args.lc:
+    showHeader(filNam)
+else:
+    dumpToFile("iplot.plt", makeGnup(filNam, fr, to))
+
+sys.exit(0)
 # print "YARGS! ", args
