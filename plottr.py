@@ -134,6 +134,7 @@ else:
 
 if args.lc:
     showHeader(filNam)
+    sys.exit(-1) #this is not exactly an error but it will prevent script laun.sh from proceeding to draw 
 else:
     dumpToFile("iplot.plt", makeGnup(filNam, fr, to))
 
