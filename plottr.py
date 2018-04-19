@@ -100,11 +100,13 @@ set lmargin screen " + str(0.01 + .03 * ncols) + "\n\
 set xdata time\n\
 set timefmt \"%y.%m.%d-%H.%M.%S\"\n\
 set xrange[\"" + unixToCreaTime(fr) + "\":\"" + unixToCreaTime(to) + "\"]\n"
+#set key autotitle columnheader
     i = 0
     for col, paint in zip(args.col, paints):
         gnup += "set ytics offset " + str(-3 * i) + ",0 \
 textcolor rgb \"" + paint + "\" \n\
 set key height " + str(i * 2 + 1) + "\n\
+#plot '" + fil + "' u 1:" + str(col) + " w l linecolor rgb \"" + paint + "\" \n\
 plot '" + fil + "' u 1:" + str(col) + " w l title '" + str(col) + "' linecolor rgb \"" + paint + "\" \n\
 unset border\n"
         i += 1
