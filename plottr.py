@@ -6,7 +6,7 @@ import time
 import datetime
 import subprocess
 
-parser = argparse.ArgumentParser(description='Process some integers.')
+parser = argparse.ArgumentParser(description='Plot log files')
 parser.add_argument('year', type=int, help="year ", choices=[
                     2016, 2017, 2018, 2019, 2020, 2021])
 parser.add_argument('month', help="month", default=datetime.date.month)

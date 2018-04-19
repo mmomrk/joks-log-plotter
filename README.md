@@ -6,13 +6,11 @@ This is a tool created to visualise certain log files with gnuplot.
 
 usage: plottr.py [-h] [-pre PRE] [-post POST] [-col COL [COL ...]] [-lc]  {2016,2017,2018,2019,2020,2021} month day hour minute second
 
-Process some integers.
+Plot log files
 
-positional arguments:
+*positional arguments:*
 
-  {2016,2017,2018,2019,2020,2021}
-
-                        year
+  {2016,2017,2018,2019,2020,2021}	year
 
   month                 month
 
@@ -24,7 +22,7 @@ positional arguments:
 
   second                second
 
-optional arguments:
+*optional arguments:*
 
   -h, --help            show this help message and exit
 
@@ -53,9 +51,9 @@ After the file is found it may either list columns name and exit (that will stop
 
 ### Options
 
-The -pre and -post flags are available to adjust timespan that is being plotted before and after the requested event. In seconds
+* The -pre and -post flags are available to adjust timespan that is being plotted before and after the requested event. In seconds
 
-The -col flag allows picking several columns to be plotted
+* The -col flag allows picking several columns to be plotted
 
 ## What to do with this
 
@@ -68,13 +66,16 @@ If you want to use column names as legend in the chart then uncomment lines 110 
 ### fixdots.sh
 
 This script is to be used if your logfile contains commas instead of dots for decimal delimiters. It replaces all commas to dots in all txt files in the folder. Probably could be better had it replaced in all files in the arguments but not now. 
-WARNING: does not make backups. The changes are irreversible. Make sure you are working with copies.
+
+*WARNING:* does not make backups. The changes are irreversible. Make sure you are working with copies.
 
 ## Requirements
 
--python 2.7 or more. Tested with 2.7.12. Probably could work with 2.4 and 3+
--gnuplot with png support
--feh installed. Or just change laun.sh to your taste
+* python 2.7 or more. Tested with 2.7.12. Probably could work with 2.4 and 3+
+
+* gnuplot with png support
+
+* feh installed. Or just change laun.sh to your taste
 
 ## Testing
 
@@ -82,7 +83,7 @@ Sample command is in the sample.command file. You may use 'bash sample.command' 
 
 ## Licence 
 
-1. All executables are spread under MIT licence.
+All executables are spread under MIT licence.
 
 Copyright (c) 2018 Mark Bochkov
 
