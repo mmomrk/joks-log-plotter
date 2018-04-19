@@ -80,7 +80,7 @@ def fileIsFat(filenam):
 
 def getRGBColors(numof):
     bank = ['red', 'green', 'blue', 'violet', 'orange',
-            'dark-red', 'fuchsia', 'teal', 'yelow', 'purple']
+            'dark-red', '#00FF00FF' , '#00008080', 'yelow', 'purple']
     if numof < len(bank):
         return bank[:numof]
     else:
@@ -100,6 +100,7 @@ set lmargin screen " + str(0.01 + .03 * ncols) + "\n\
 set xdata time\n\
 set timefmt \"%y.%m.%d-%H.%M.%S\"\n\
 set xrange[\"" + unixToCreaTime(fr) + "\":\"" + unixToCreaTime(to) + "\"]\n"
+#set title "This is the title at the top"
 #set key autotitle columnheader
     i = 0
     for col, paint in zip(args.col, paints):

@@ -52,7 +52,7 @@ You are probably interested in adjusting your image viewer. You may use 'xdg-ope
 
 ###Chart column names into legend
 
-If you want to use column names as legend in the chart then uncomment lines 109 and 103 in the plottr.py and comment out line 110. Should do the trick
+If you want to use column names as legend in the chart then uncomment lines 110 and 103 and 104 in the plottr.py and comment out line 111. Should do the trick
 
 ###fixdots.sh
 
